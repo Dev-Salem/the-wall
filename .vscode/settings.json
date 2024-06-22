@@ -4,6 +4,7 @@
         "authtoken",
         "dotenv",
         "simplejwt",
-        "socialaccount"
+        "socialaccount",
+        "viewsets"
     ]
 }
