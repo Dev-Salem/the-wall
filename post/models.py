@@ -21,7 +21,17 @@ class UserGeneratedContent(models.Model):
 
 
 class Post(UserGeneratedContent):
-    pass
+    @property
+    def upvotes_count(self):
+        return self.vote_set.filter(vote="up").count()
+
+    @property
+    def downvotes_count(self):
+        return self.vote_set.filter(vote="down").count()
+
+    @property
+    def comments_count(self):
+        return self.comment_set.count()
 
 
 class Comment(UserGeneratedContent):

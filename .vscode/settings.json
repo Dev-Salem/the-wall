@@ -4,8 +4,10 @@
         "authtoken",
         "corsheaders",
         "dotenv",
+        "downvotes",
         "simplejwt",
         "socialaccount",
+        "upvotes",
         "viewsets",
         "yasg"
     ]

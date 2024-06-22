@@ -8,7 +8,15 @@ from .models import Comment, Post, Vote
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = [
+            "id",
+            "body",
+            "created_at",
+            "author",
+            "upvotes_count",
+            "downvotes_count",
+            "comments_count",
+        ]
         read_only_fields = ["author"]
 
 
