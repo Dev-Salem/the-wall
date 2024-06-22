@@ -1,6 +1,7 @@
-from rest_framework import permissions, viewsets
+from rest_framework import filters, permissions, viewsets
 
 from .models import Comment, Post, Vote
+from .pagination import CustomPagePagination
 from .permissions import isAuthorOrReadOnly
 from .serializers import *
 
@@ -9,6 +10,17 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    pagination_class = CustomPagePagination
+    filter_backends = [
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    search_fields = [
+        "body",
+    ]
+    ordering_fields = [
+        "created_at",
+    ]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
