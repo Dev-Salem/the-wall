@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
-        "dotenv"
+        "allauth",
+        "authtoken",
+        "dotenv",
+        "simplejwt",
+        "socialaccount"
     ]
 }
