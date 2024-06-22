@@ -6,7 +6,7 @@ from django.db.models import Q
 
 
 class UserGeneratedContent(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     body = models.CharField(
         max_length=300,
@@ -47,22 +47,31 @@ class Vote(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["author", "post"],
+                fields=[
+                    "author",
+                    "post",
+                ],
                 name="each user can vote each post just once",
+                violation_error_message="Already voted on this post",
             ),
             models.UniqueConstraint(
-                fields=["author", "comment"],
+                fields=[
+                    "author",
+                    "comment",
+                ],
                 name="each user can vote each comment just once",
+                violation_error_message="Already voted on this comment",
             ),
             models.CheckConstraint(
                 name="Either post is null or comment is null",
                 check=Q(post__isnull=True, comment__isnull=False)
                 | Q(post__isnull=False, comment__isnull=True),
+                violation_error_message="You can vote either a post or a comment",
             ),
         ]
 
     def __str__(self):
         if self.post:
-            return f"{self.vote} on '{self.post}'"
+            return f"{self.vote} on '{self.post}' by {self.author}"
         else:
-            return f"{self.vote} on '{self.comment}'"
+            return f"{self.vote} on '{self.comment}' by {self.author}"
