@@ -2,9 +2,11 @@
     "cSpell.words": [
         "allauth",
         "authtoken",
+        "corsheaders",
         "dotenv",
         "simplejwt",
         "socialaccount",
-        "viewsets"
+        "viewsets",
+        "yasg"
     ]
 }
