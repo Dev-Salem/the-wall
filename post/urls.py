@@ -9,3 +9,6 @@ router.register("comments", views.CommentViewSet)
 router.register("votes", views.VoteViewSet)
 
 urlpatterns = router.urls
+urlpatterns += [
+    path("popular/", views.PopularPostsListView.as_view()),
+]

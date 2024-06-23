@@ -1,6 +1,5 @@
 import logging
-
-from rest_framework import filters, permissions, viewsets
+from rest_framework import filters, permissions, response, viewsets
 
 from . import utils
 from .models import Comment, Post, Vote
@@ -25,6 +24,9 @@ class PostViewSet(viewsets.ModelViewSet):
     ]
     ordering_fields = [
         "created_at",
+    ]
+    ordering = [
+        "-created_at",
     ]
 
     def perform_create(self, serializer):
@@ -64,3 +66,10 @@ class VoteViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class PopularPostsListView(viewsets.generics.ListAPIView):
+    queryset = utils.get_popular_posts_queryset()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
+    serializer_class = PostSerializer
+    pagination_class = CustomPagePagination
