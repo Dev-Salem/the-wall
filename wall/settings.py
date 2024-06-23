@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -113,14 +114,15 @@ WSGI_APPLICATION = "wall.wsgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "wall",
-        "USER": "devsalem",
-        "PASSWORD": os.environ["DATABASE_PASSWORD"],
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "wall",
+    #     "USER": "devsalem",
+    #     "PASSWORD": os.environ["DATABASE_PASSWORD"],
+    #     "HOST": "localhost",
+    #     "PORT": "5432",
+    # }
 }
 
 # Password validation
