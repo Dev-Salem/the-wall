@@ -10,7 +10,7 @@ from .serializers import CommentSerializer
 
 
 def paginate_comment_section(post, request):
-    comments = post.comment_set.all()
+    comments = post.comment_set.filter(parent_comment__isnull=True)
     comment_paginator = CustomCommentPagePagination()
     paginatedComments = comment_paginator.paginate_queryset(
         queryset=comments, request=request

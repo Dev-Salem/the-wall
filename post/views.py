@@ -1,5 +1,7 @@
 import logging
-from rest_framework import filters, permissions, response, viewsets
+
+from rest_framework import filters, permissions, viewsets
+from rest_framework.exceptions import NotFound
 
 from . import utils
 from .models import Comment, Post, Vote
@@ -70,6 +72,23 @@ class VoteViewSet(viewsets.ModelViewSet):
 
 class PopularPostsListView(viewsets.generics.ListAPIView):
     queryset = utils.get_popular_posts_queryset()
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     pagination_class = CustomPagePagination
+
+
+class RepliesListView(viewsets.generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    pagination_class = CustomPagePagination
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        comment_id = self.kwargs["id"]
+        comment = Comment.objects.get(id=comment_id)
+        if comment_id is not None:
+            queryset = comment.comment_set.all()
+            return queryset
+        else:
+            raise NotFound

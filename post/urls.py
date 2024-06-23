@@ -11,4 +11,5 @@ router.register("votes", views.VoteViewSet)
 urlpatterns = router.urls
 urlpatterns += [
     path("popular/", views.PopularPostsListView.as_view()),
+    path("replies/<str:id>/", views.RepliesListView.as_view()),
 ]
