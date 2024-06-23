@@ -1,13 +1,16 @@
 {
     "cSpell.words": [
         "allauth",
+        "asgi",
         "authtoken",
         "corsheaders",
         "dotenv",
         "downvotes",
+        "gunicorn",
         "simplejwt",
         "socialaccount",
         "upvotes",
+        "uvicorn",
         "viewsets",
         "yasg"
     ]

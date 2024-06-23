@@ -1,19 +1,20 @@
 databases:
-  - name: mysitedb
+  - name: the-wall
     plan: free
-    databaseName: mysite
-    user: mysite
+    databaseName: the-wall
+    user: postgres
 
 services:
   - type: web
     plan: free
-    name: mysite
+    name: the-wall
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn wall.asgi:application -k uvicorn.workers.UvicornWorker"    envVars:
+    startCommand: "python -m gunicorn wall.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysitedb
+          name: the-wall
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
