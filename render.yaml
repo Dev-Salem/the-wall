@@ -1,8 +1,8 @@
 databases:
   - name: the-wall
     plan: free
-    databaseName: the-wall
-    user: postgres
+    databaseName: wall
+    user: devsalem
 
 services:
   - type: web
