@@ -28,8 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ["DJANGO_DEBUG"]
-print("🙂=================Environment===========🙂", os.environ["DJANGO_DEBUG"])
+DEBUG = os.getenv("DEBUG", False) == "True"
+
+
 ALLOWED_HOSTS = ["the-wall-418k.onrender.com", "localhost"]
 
 
@@ -198,4 +199,3 @@ AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = "eu-north-1"
-DEBUG = os.environ["DJANGO_DEBUG"]
