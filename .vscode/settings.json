@@ -4,6 +4,7 @@
         "asgi",
         "authtoken",
         "corsheaders",
+        "devsalem",
         "dotenv",
         "downvotes",
         "gunicorn",

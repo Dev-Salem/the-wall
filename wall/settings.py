@@ -115,8 +115,8 @@ WSGI_APPLICATION = "wall.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "the-wall",
-        "USER": "postgres",
+        "NAME": "wall",
+        "USER": "devsalem",
         "PASSWORD": os.environ["DATABASE_PASSWORD"],
         "HOST": "localhost",
         "PORT": "5432",
