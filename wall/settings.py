@@ -30,7 +30,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ["DJANGO_DEBUG"]
 
-ALLOWED_HOSTS = ["*onrender.com", "*"]
+ALLOWED_HOSTS = ["*onrender.com", "localhost"]
 
 
 # Application definition
