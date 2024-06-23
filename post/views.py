@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
+    permission_classes = [isAuthorOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     pagination_class = CustomPagePagination
@@ -46,7 +46,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
+    permission_classes = [isAuthorOrReadOnly]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = CustomPagePagination
@@ -59,7 +59,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class VoteViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isAuthorOrReadOnly]
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+    ]
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
