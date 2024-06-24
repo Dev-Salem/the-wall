@@ -31,7 +31,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = os.getenv("DJANGO_DEBUG", False) == "True"
 
 
-ALLOWED_HOSTS = ["the-wall-418k.onrender.com", "localhost"]
+ALLOWED_HOSTS = ["the-wall-418k.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -68,6 +68,15 @@ REST_AUTH = {
     "JWT_AUTH_COOKIE": "token",
     "JWT_AUTH_REFRESH_COOKIE": "refresh-token",
 }
+
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "users.serializers.CustomUserDetailsSerializer",
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "users.serializers.CustomRegisterSerializer",
+}
+ACCOUNT_ADAPTER = "users.adapter.CustomAccountAdapter"
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
