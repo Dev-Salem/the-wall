@@ -1,6 +1,6 @@
 import logging
 
-from rest_framework import filters, permissions, viewsets
+from rest_framework import filters, permissions, viewsets, mixins
 from rest_framework.exceptions import NotFound
 
 from . import utils
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = [isAuthorOrReadOnly]
+    permission_classes = [isAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     pagination_class = CustomPagePagination
@@ -46,7 +46,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = [isAuthorOrReadOnly]
+    permission_classes = [isAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     pagination_class = CustomPagePagination
@@ -59,9 +59,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class VoteViewSet(viewsets.ModelViewSet):
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+    permission_classes = [isAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
     queryset = Vote.objects.all()
     serializer_class = VoteSerializer
 
